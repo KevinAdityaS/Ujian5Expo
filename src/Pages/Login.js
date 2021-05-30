@@ -1,6 +1,9 @@
-import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import { LoginAction } from '../Redux/Action';
+import { Card } from 'react-native-elements';
 
 class Login extends Component {
   
@@ -14,7 +17,7 @@ class Login extends Component {
 
     }
 
-    handleLogin(){
+    handlerLogin(){
 
         axios.get('http://192.168.0.106:4646/user/login/', {
             params : {
@@ -46,12 +49,16 @@ class Login extends Component {
 
     return (
       <View style = {styles.viewStyle}>
-        <Text> Username </Text>
-        <TextInput placeholder = "Insert your username..." onChangeText={(value) => {this.setState({username : value})}}/>
-        <Text> Phone </Text>
-        <TextInput placeholder = "Insert your phone number..." onChangeText={(value) => {this.setState({phone : value})}}/>
-        
-        <TouchableOpacity style={styles.buttonStyle} onPress={()=>{this.handleLogin()}}><Text style={styles.textStyle}>Login</Text></TouchableOpacity>
+        <Card>
+            <Card.Title>LOGIN</Card.Title>
+            <Card.Divider/>
+            <Text style = {styles.titleStyle}> Username </Text>
+            <TextInput style = {styles.inputStyle} placeholder = " Insert your username..." onChangeText={(value) => {this.setState({username : value})}}/>
+            <Text style = {styles.titleStyle}> Phone </Text>
+            <TextInput style = {styles.inputStyle} placeholder = " Insert your phone number..." onChangeText={(value) => {this.setState({phone : value})}}/>
+            <Card.Divider/>
+            <TouchableOpacity style={styles.buttonStyle} onPress={()=>{this.handlerLogin()}}><Text style={styles.textStyle}>Login</Text></TouchableOpacity>
+        </Card>
       </View>
     )
   }
@@ -71,17 +78,29 @@ export default connect(mapStateToProps, mapDispatchToProps)(Login)
 const styles = StyleSheet.create({
 
     viewStyle:{
-        margin:20,
+        margin:2,
     },
 
     buttonStyle:{
-        borderWidth:10,
-        borderColor:"red",
+        borderWidth:2,
+        borderColor:"blue",
+        padding:10,
         margin:20
+    },
+
+    inputStyle:{
+      height: 30,
+      margin: 8,
+      borderWidth: 1,
     },
 
     textStyle:{
         textAlign:'center',
-    }
+        fontWeight:'bold'
+    },
+
+    titleStyle:{
+      fontWeight : 'bold'
+  }
 
 })
