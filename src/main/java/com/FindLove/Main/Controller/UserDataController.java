@@ -59,7 +59,7 @@ public class UserDataController {
 		
 	}
 	
-	@PostMapping("/")
+	@PostMapping("/register/")
 	public String postRegisterUser(@RequestParam(value = "file")MultipartFile image, @ModelAttribute(value = "data") String dataJson) throws IOException {
 		
 		String fileName = StringUtils.cleanPath(image.getOriginalFilename());
